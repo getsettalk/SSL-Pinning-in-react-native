@@ -36,13 +36,18 @@ Save the copied certificate as a `.pem` file in your working directory.
 
 ### 3. **Verify the Certificate (Optional)**
 To check which domain the certificate belongs to:
+#### **Linux/Unix/macOS:**
 ```bash
 openssl x509 -in rimeso_cert.pem -text -noout | grep "Subject:"
 ```
 
+#### **Window (Powershell):**
+```powershell
+openssl x509 -in rimeso_cert.pem -text -noout | FindStr "Subject:"
+```
 #### Example Output:
 ```
-Subject: C=IN, ST=Haryana, L=Gurugram, O=UMMEED HOUSING FINANCE PRIVATE LIMITED, CN=*.rimeso.in
+Subject: C=IN, ST=Haryana, L=Gurugram, O=RIMESO PRIVATE LIMITED, CN=*.rimeso.in
 ```
 
 ### 4. **Generate the Public Key Hash (Pin SHA256)**
