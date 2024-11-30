@@ -5,6 +5,8 @@ This guide explains how to generate a SHA256 public key hash from a server certi
 
 ## **Steps to Generate the Certificate Public Key Hash**
 
+# ✅ User Linux/Unix Command to get Correct Hash base64 key
+
 ### 1. **Retrieve the Server Certificate**
 
 #### **Linux/Unix/macOS:**
