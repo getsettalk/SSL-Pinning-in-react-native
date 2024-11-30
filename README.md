@@ -5,7 +5,7 @@ This guide explains how to generate a SHA256 public key hash from a server certi
 
 ## **Steps to Generate the Certificate Public Key Hash**
 
-# ✅ User Linux/Unix Command to get Correct Hash base64 key
+## ✅ User Linux/Unix Command to get Correct Hash base64 key [ Use GitBash ]
 
 ### 1. **Retrieve the Server Certificate**
 
@@ -97,3 +97,59 @@ This is your **Pin SHA256** key, which will be used in your React Native app for
 Follow these steps to correctly generate and verify the SSL public key hash for secure SSL pinning in your React Native application. By following this guide, you can strengthen your app’s security and prevent man-in-the-middle (MITM) attacks.
 
 ---
+
+
+
+# 👌 How to Implement SSL Pinning in React-Native Android
+Create A file name `SSLPinningFactory.java` at here `android\app\src\main\java\com\schoolapp\SSLPinningFactory.java`
+in this file copy and paste this content:
+and replace content : <-- your website sha256 key --> with your webiste or api public ssl key without any space
+
+```java
+
+package com.ummeedhousingfinance; <--- change this to your app based
+
+import com.facebook.react.modules.network.OkHttpClientFactory;
+import com.facebook.react.modules.network.OkHttpClientProvider;
+import okhttp3.CertificatePinner;
+import okhttp3.OkHttpClient;
+
+public class SSLPinningFactory implements OkHttpClientFactory {
+    private static String hostname = "*.rimeso.com";
+
+    public OkHttpClient createNewNetworkModuleClient() {
+
+        CertificatePinner certificatePinner = new CertificatePinner.Builder()
+                .add(hostname, "sha256/<-- your website sha256 key -->") // this should be public key not privet key
+                .build();
+
+        OkHttpClient.Builder clientBuilder = OkHttpClientProvider.createClientBuilder();
+        return clientBuilder.certificatePinner(certificatePinner).build();
+    }
+}
+
+```
+
+After that Register this file in MainApplication.java
+
+```java
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+
+
+
+    SoLoader.init(this, /* native exopackage */ false);
+
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+      // If you opted-in for the New Architecture, we load the native entry point for this app.
+      DefaultNewArchitectureEntryPoint.load();
+    }
+    ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    OkHttpClientProvider.setOkHttpClientFactory(new SSLPinningFactory()); <-- i have kept here 
+  }
+```
+
+
+Great , now rebuild you android app and you are able to make SSL Handshake test your api request in any (Axios, Fetch)
