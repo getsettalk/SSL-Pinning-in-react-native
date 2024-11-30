@@ -9,6 +9,11 @@ This guide explains how to generate a SHA256 public key hash from a server certi
 
 ### 1. **Retrieve the Server Certificate**
 
+> You can use this website to get your api domain public pin sha256 key: https://www.ssllabs.com/ssltest/index.html, view below image in (blue colord marked text is sha256 key)
+> ![image](https://github.com/user-attachments/assets/3f7ac668-34d5-4967-bf73-8e8bc88f7aa5)
+
+
+
 #### **Linux/Unix/macOS:**
 ```bash
 openssl s_client -showcerts -servername rimeso.in -connect rimeso.in:443 < /dev/null
