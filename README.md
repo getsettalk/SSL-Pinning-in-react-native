@@ -13,6 +13,10 @@ This guide explains how to generate a SHA256 public key hash from a server certi
 > ![image](https://github.com/user-attachments/assets/3f7ac668-34d5-4967-bf73-8e8bc88f7aa5)
 
 
+###  Watch Here Full Video :
+https://drive.google.com/file/d/1pnLqUJpDf5_LOhxkDfCNugZyAh1R_VMi/view?usp=sharing
+
+
 
 #### **Linux/Unix/macOS:**
 ```bash
